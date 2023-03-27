@@ -6,3 +6,30 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+num_traits = { path = "../num_traits" }
+void = { path = "../void", features = ["std", "num_traits"] }
+builder = { path = "macros/builder" }
+tensor = { path = "../tensor" }
+
+ureq = { version = "*", default-features = false, optional = true }
+crc32fast = { version = "*", features = ["std", "nightly"] }
+flate2 = { version = "*", optional = true }
+
+[dependencies.rand]
+version = "*"
+#optional = true
+
+[dependencies.rand_distr]
+version = "*"
+optional = true
+
+[dev-dependencies]
+measure = { path = "../measure" }
+
+[features]
+datasets = ["ureq", "flate2"]
+distributions = ["rand_distr"]
+
+[[example]]
+name = "basic"
+required-features = ["datasets", "distributions"]
